@@ -13,7 +13,7 @@ if [ $# -gt 1 ]
 then
 	if [ $2 == "latest" ]
 	then
-		docker tag llamos/sbt:1.6.4a llamos/sbt:latest
+		docker tag llamos/sbt:$1 llamos/sbt:latest
 	fi
 fi
 
