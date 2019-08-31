@@ -17,6 +17,9 @@ RUN rm sbt.deb
 RUN apt-get update
 RUN apt-get install sbt -y
 
+# Also install git for dev needs
+RUN apt-get install git -y
+
 # Test to make sure it worked, 
 # also forcing the download of sbt from the launcher
 RUN sbt sbtVersion
