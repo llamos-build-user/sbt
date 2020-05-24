@@ -1,6 +1,6 @@
 # Base image for JDK 8u222 on Debian 10
 FROM openjdk:8u222-jdk-slim-buster
-ARG SBT_VERSION=1.2.8
+ARG SBT_VERSION=1.3.8
 
 # We need wget and ca-certificates to get the .deb
 RUN apt-get update
@@ -28,5 +28,5 @@ RUN sbt sbtVersion
 VOLUME [ "/workspace" ]
 WORKDIR /workspace
 
-# Define sbt as the entrypoint, of course
+# Define sbt as the entrypoint
 ENTRYPOINT [ "sbt" ]
