@@ -1,5 +1,5 @@
 # Base image for JDK 8u222 on Debian 10
-FROM openjdk:8u222-jdk-slim-buster
+FROM openjdk:8u252-jdk-slim-buster
 ARG SBT_VERSION=1.3.8
 
 # We need wget and ca-certificates to get the .deb
