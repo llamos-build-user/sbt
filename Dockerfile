@@ -1,27 +1,23 @@
 # Base image for JDK 8u222 on Debian 10
-FROM openjdk:8u252-jdk-slim-buster
-ARG SBT_VERSION=1.3.8
+FROM openjdk:8u292-jdk-slim-buster
+ARG SBT_VERSION=1.5.0
 
 # We need wget and ca-certificates to get the .deb
 RUN apt-get update
 RUN apt-get install wget ca-certificates -y
 
-# Download the deb archive
-RUN wget -q https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb -O sbt.deb
+# Download the release archive
+RUN mkdir -p /sbt
+WORKDIR /sbt
+RUN wget -q https://github.com/sbt/sbt/releases/download/v1.5.3/sbt-1.5.3.tgz -O sbt.tgz
 
-# Install it
-RUN dpkg -i sbt.deb
-RUN rm sbt.deb
-
-# Now install the package from apt
-RUN apt-get update
-RUN apt-get install sbt -y
-
-# Also install git for dev needs
-RUN apt-get install git -y
+# Unpack it
+RUN tar -xzvf sbt.tgz
+RUN rm sbt.tgz
 
 # Test to make sure it worked, 
 # also forcing the download of sbt from the launcher
+RUN ln -s /sbt/bin/sbt /bin/sbt
 RUN sbt sbtVersion
 
 # Define a volume for the working directory
